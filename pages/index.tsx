@@ -7,7 +7,7 @@ import GlobalStyles from '../src/utils/globalStyles';
 import { startClock } from '../src/store/timer/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut, setUser } from '../src/store/login/actions';
-import { Button } from '../src/components/home/styles';
+import { Button, Container } from '../src/components/home/styles';
 
 const IndexPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -30,14 +30,14 @@ const IndexPage: React.FC = () => {
   return (
     <ThemeProvider theme={theme} >
       <GlobalStyles />
-      <div>
+      <Container>
         <h1>Bem vindo(a) {user && user.name}</h1>
 
         <Button onClick={handleQuit}>SAIR</Button>
 
         <h1>Exemplo de clock com redux</h1>
         {JSON.stringify(timer)}
-      </div>
+      </Container>
     </ThemeProvider>
   );
 }

@@ -1,5 +1,5 @@
 
-import * as types from './types'
+import types from './types'
 
 export const startClock = () => ({ type: types.START_CLOCK });
 

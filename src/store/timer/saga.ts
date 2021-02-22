@@ -1,5 +1,5 @@
 import { all, call, delay, put, take } from 'redux-saga/effects';
-import * as types from './types'
+import types from './types'
 import { serverRenderClock } from './actions';
 
 function* runClockSaga() {

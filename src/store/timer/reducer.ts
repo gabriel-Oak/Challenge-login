@@ -1,5 +1,5 @@
 import { ActionType } from '../../interfaces/redux'
-import * as types from './types'
+import types from './types'
 
 const initialTimerState = {
   lastUpdate: 0,

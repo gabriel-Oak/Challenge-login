@@ -34,15 +34,16 @@ export const FormContainer = styled.section`
 
 export const Form = styled.form`
   position: absolute;
-  top: 96px;
-  left: 96px;
+  top: 88px;
+  left: 88px;
   width: 100%;
   max-width: 256px;
+  padding: 8px;
   
   @media (max-width: 400px) {
     left: 50%;
     transform: translate(-50%);
-    top: 48px;
+    top: 40px;
   }
 `;
 

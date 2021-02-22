@@ -1,5 +1,7 @@
-export const TICK = 'TICK'
-export const INCREMENT = 'INCREMENT'
-export const DECREMENT = 'DECREMENT'
-export const RESET = 'RESET'
-export const START_CLOCK = 'START_CLOCK'
+export default {
+  TICK: '@timer/TICK',
+  INCREMENT: '@timer/INCREMENT',
+  DECREMENT: '@timer/DECREMENT',
+  RESET: '@timer/RESET',
+  START_CLOCK: '@timer/START_CLOCK',
+}
