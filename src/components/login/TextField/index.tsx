@@ -22,6 +22,7 @@ const TextField: React.FC<Props> = ({
   <InputContainer>
     <Label htmlFor={id}>{label}</Label>
     <Input
+      error={!!error}
       disabled={disabled}
       name={name}
       value={value}

@@ -1,7 +1,10 @@
 import styled from "styled-components";
+const teste = ({ error, theme }: { error: boolean, theme: any }) => error 
+? theme.colors.secondary 
+: '#989FDB';
 
 export const Input = styled.input`
-  border: 1px solid #989FDB;
+  border: 1px solid ${teste};
   padding: 16px;
   box-sizing: border-box;
   border-radius: 8px;
