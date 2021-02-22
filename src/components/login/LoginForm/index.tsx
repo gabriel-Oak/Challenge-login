@@ -1,12 +1,16 @@
 import Router from 'next/router';
 import { SyntheticEvent, useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import { LoginFieldEvent, LoginFormData } from '../../../interfaces/login';
 import { UserData } from '../../../interfaces/user';
 import apiService from '../../../services/apiService';
 import { getUser, storeUser } from '../../../services/authService';
 import isEmail from '../../../utils/isEmail';
 import validateLoginForm from '../../../utils/validateLoginForm';
-import { BottomCaption, CloseButton, ErrorLabel, Form, FormContainer, Header, Input, InputContainer, Label, PasswordLink, Subheader, SubmitButton } from './styles';
+import TextField from '../TextField';
+import {
+  BottomCaption, Form, FormContainer, Header, PasswordLink, Subheader, SubmitButton,
+} from './styles';
 
 const LoginForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -26,9 +30,17 @@ const LoginForm: React.FC = () => {
     setUser(getUser());
   }, []);
 
-  const handleClear = () => setForm({
+  const handleClearEmail = () => setForm({
     ...form,
     email: {
+      value: '',
+      touched: false,
+    }
+  });
+
+  const handleClearPass = () => setForm({
+    ...form,
+    password: {
       value: '',
       touched: false,
     }
@@ -56,14 +68,14 @@ const LoginForm: React.FC = () => {
         touched: true,
       },
     });
-    
+
     const formData: LoginFormData = {
       email: form.email.value,
       password: form.password.value,
     }
 
     if (!validateLoginForm(formData)) return;
-    
+
     setLoading(true);
 
     try {
@@ -73,6 +85,11 @@ const LoginForm: React.FC = () => {
       storeUser(user);
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error,
+      })
     }
 
     setLoading(false);
@@ -91,42 +108,34 @@ const LoginForm: React.FC = () => {
           Para acessar a plataforma, faça seu login.
         </Subheader>
 
-        <InputContainer>
-          <Label htmlFor="email-field">E-MAIL</Label>
-          <Input
-            disabled={loading}
-            name="email"
-            value={form.email.value}
-            id="email-field"
-            placeholder="user.name@mail.com"
-            onChange={handleChange}
-            type="email"
-          />
+        <TextField
+          label="E-MAIL"
+          disabled={loading}
+          name="email"
+          value={form.email.value}
+          id="email-field"
+          placeholder="user.name@mail.com"
+          onChange={handleChange}
+          type="email"
+          error={form.email.touched ? isEmail(form.email.value) : ''}
+          onClear={handleClearEmail}
+        />
 
-          <CloseButton onClick={handleClear} type="button">
-            <img src="/images/close.svg" alt="clear" height={20} />
-          </CloseButton>
-
-          {form.email.touched && isEmail(form.email.value) && (
-            <ErrorLabel>{isEmail(form.email.value)}</ErrorLabel>
-          )}
-        </InputContainer>
-
-        <InputContainer>
-          <Label htmlFor="password-field">SENHA</Label>
-          <Input
-            disabled={loading}
-            name="password"
-            value={form.password.value}
-            id="password-field"
-            placeholder="****" type="password"
-            onChange={handleChange}
-          />
-
-          {form.password.touched && !form.password.value && (
-            <ErrorLabel>Informe uma senha;</ErrorLabel>
-          )}
-        </InputContainer>
+        <TextField
+          label="SENHA"
+          disabled={loading}
+          name="password"
+          value={form.password.value}
+          id="password-field"
+          placeholder="****"
+          type="password"
+          onClear={handleClearPass}
+          onChange={handleChange}
+          error={form.password.touched && !form.password.value
+            ? 'Informe uma senha;'
+            : ''
+          }
+        />
 
         <SubmitButton type="submit" disabled={loading}>
           {loading ? 'ENTRANDO...' : 'ENTRAR'}
@@ -134,7 +143,7 @@ const LoginForm: React.FC = () => {
 
         <BottomCaption>
           {'Esqueceu seu login ou senha? Clique '}
-          
+
           <PasswordLink href="/password-recovery">
             aqui
           </PasswordLink>

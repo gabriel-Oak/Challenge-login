@@ -49,7 +49,7 @@ const IndexPage: React.FC = () => {
       <GlobalStyles />
 
       <div>
-        <h1>Bem vindo ao sistema: {user && user.name}</h1>
+        <h1>Bem vindo(a) {user && user.name}</h1>
 
         <Button onClick={handleQuit}>SAIR</Button>
       </div>
