@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Link from 'next/link'
 
 export const Header = styled.h1`
   font-size: 40px;
@@ -58,6 +59,11 @@ export const Input = styled.input`
     border-width: 2px;
     outline: none;
   }
+
+  &:disabled {
+    color: #8a8a8a;
+    border-color: #8a8a8a;
+  } 
 `;
 
 export const Label = styled.label`
@@ -85,6 +91,11 @@ export const SubmitButton = styled.button`
   &:hover {
     box-shadow: 0px 10px 25px 10px #CF99DB;
   }
+
+  &:disabled {
+    background: #8a8a8a;
+    box-shadow: none;
+  } 
 `;
 
 export const BottomCaption = styled.div`
@@ -98,7 +109,7 @@ export const BottomCaption = styled.div`
 `;
 
 export const ErrorLabel = styled.div`
-  color: ${({theme}) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.secondary};
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
@@ -121,4 +132,8 @@ export const CloseButton = styled.button`
   right: 16px;
   top: 32px;
   cursor: pointer;
+`;
+
+export const PasswordLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.secondary};
 `;

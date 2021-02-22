@@ -1,9 +1,16 @@
-import { SyntheticEvent, useState } from 'react';
-import { LoginFieldEvent } from '../../interfaces/login';
+import Router from 'next/router';
+import { SyntheticEvent, useEffect, useState } from 'react';
+import { LoginFieldEvent, LoginFormData } from '../../interfaces/login';
+import { UserData } from '../../interfaces/user';
+import apiService from '../../services/apiService';
+import { getUser, storeUser } from '../../services/authService';
 import isEmail from '../../utils/isEmail';
-import { BottomCaption, CloseButton, ErrorLabel, Form, FormContainer, Header, Input, InputContainer, Label, Subheader, SubmitButton } from './styles';
+import validateLoginForm from '../../utils/validateLoginForm';
+import { BottomCaption, CloseButton, ErrorLabel, Form, FormContainer, Header, Input, InputContainer, Label, PasswordLink, Subheader, SubmitButton } from './styles';
 
 const LoginForm: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null as unknown as UserData);
   const [form, setForm] = useState({
     email: {
       value: '',
@@ -14,6 +21,10 @@ const LoginForm: React.FC = () => {
       touched: false,
     },
   });
+
+  useEffect(() => {
+    setUser(getUser());
+  }, []);
 
   const handleClear = () => setForm({
     ...form,
@@ -33,7 +44,7 @@ const LoginForm: React.FC = () => {
     });
   }
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     setForm({
       email: {
@@ -45,7 +56,29 @@ const LoginForm: React.FC = () => {
         touched: true,
       },
     });
+    
+    const formData: LoginFormData = {
+      email: form.email.value,
+      password: form.password.value,
+    }
+
+    if (!validateLoginForm(formData)) return;
+    
+    setLoading(true);
+
+    try {
+      const { data: user } = await apiService.post<UserData>('/login', formData);
+
+      setUser(user);
+      storeUser(user);
+    } catch (error) {
+      console.error(error);
+    }
+
+    setLoading(false);
   }
+
+  if (!!user) Router.replace('/');
 
   return (
     <FormContainer>
@@ -61,6 +94,7 @@ const LoginForm: React.FC = () => {
         <InputContainer>
           <Label htmlFor="email-field">E-MAIL</Label>
           <Input
+            disabled={loading}
             name="email"
             value={form.email.value}
             id="email-field"
@@ -69,7 +103,7 @@ const LoginForm: React.FC = () => {
             type="email"
           />
 
-          <CloseButton onClick={handleClear}>
+          <CloseButton onClick={handleClear} type="button">
             <img src="/images/close.svg" alt="clear" height={20} />
           </CloseButton>
 
@@ -81,6 +115,7 @@ const LoginForm: React.FC = () => {
         <InputContainer>
           <Label htmlFor="password-field">SENHA</Label>
           <Input
+            disabled={loading}
             name="password"
             value={form.password.value}
             id="password-field"
@@ -93,12 +128,16 @@ const LoginForm: React.FC = () => {
           )}
         </InputContainer>
 
-        <SubmitButton type="submit">
-          ENTRAR
+        <SubmitButton type="submit" disabled={loading}>
+          {loading ? 'ENTRANDO...' : 'ENTRAR'}
         </SubmitButton>
 
         <BottomCaption>
-          Esqueceu seu login ou senha? Clique aqui
+          {'Esqueceu seu login ou senha? Clique '}
+          
+          <PasswordLink href="/password-recovery">
+            aqui
+          </PasswordLink>
         </BottomCaption>
       </Form>
     </FormContainer>

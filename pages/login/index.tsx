@@ -20,9 +20,8 @@ const LoginPage: React.FC = () => (
   </ThemeProvider>
 );
 
-
-export default LoginPage;
-
 export const getStaticProps = async () => ({
   props: {},
 });
+
+export default LoginPage;
