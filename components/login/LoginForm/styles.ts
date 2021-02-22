@@ -106,6 +106,7 @@ export const BottomCaption = styled.div`
   text-align: center;
   color: #989FDB;
   padding: 0 24px;
+  margin-bottom: 16px;
 `;
 
 export const ErrorLabel = styled.div`

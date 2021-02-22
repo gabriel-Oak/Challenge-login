@@ -1,11 +1,11 @@
 import Router from 'next/router';
 import { SyntheticEvent, useEffect, useState } from 'react';
-import { LoginFieldEvent, LoginFormData } from '../../interfaces/login';
-import { UserData } from '../../interfaces/user';
-import apiService from '../../services/apiService';
-import { getUser, storeUser } from '../../services/authService';
-import isEmail from '../../utils/isEmail';
-import validateLoginForm from '../../utils/validateLoginForm';
+import { LoginFieldEvent, LoginFormData } from '../../../interfaces/login';
+import { UserData } from '../../../interfaces/user';
+import apiService from '../../../services/apiService';
+import { getUser, storeUser } from '../../../services/authService';
+import isEmail from '../../../utils/isEmail';
+import validateLoginForm from '../../../utils/validateLoginForm';
 import { BottomCaption, CloseButton, ErrorLabel, Form, FormContainer, Header, Input, InputContainer, Label, PasswordLink, Subheader, SubmitButton } from './styles';
 
 const LoginForm: React.FC = () => {

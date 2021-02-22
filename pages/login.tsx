@@ -1,10 +1,10 @@
 import { ThemeProvider } from 'styled-components';
-import theme from '../../utils/theme';
+import theme from '../utils/theme';
 import {
   ImageContainer, ImageGradient, Main
-} from './styles';
-import GlobalStyles from '../../utils/globalStyles';
-import LoginForm from '../../components/LoginForm';
+} from '../components/login/styles';
+import GlobalStyles from '../utils/globalStyles';
+import LoginForm from '../components/login/LoginForm';
 
 const LoginPage: React.FC = () => (
   <ThemeProvider theme={theme} >

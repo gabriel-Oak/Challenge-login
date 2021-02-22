@@ -12,6 +12,7 @@ export const ImageContainer = styled.section`
   overflow: hidden;
   background-image: url('/images/cover.png');
   background-size: cover;
+  background-position: center;
 `;
 
 export const ImageGradient = styled.div`
