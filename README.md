@@ -10,3 +10,6 @@ para experimentar, basta executar:
 - npm i
 - npm run dev
 - Caso você esteja com preguiça de clonar o repositório, também pode visitar este link: https://challenge-login-gabriel-oak.vercel.app/
+
+## Tests
+ - npm run test:e2e - End to End tests | Testes de Ponta a Ponta
