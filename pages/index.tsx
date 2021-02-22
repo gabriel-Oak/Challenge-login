@@ -8,6 +8,7 @@ import { startClock } from '../src/store/timer/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut, setUser } from '../src/store/login/actions';
 import { Button, Container } from '../src/components/home/styles';
+import { StoreState } from '../src/interfaces/store';
 
 const IndexPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,8 +17,8 @@ const IndexPage: React.FC = () => {
     dispatch(setUser(getUser()));
   }, [dispatch]);
 
-  const { timer } = useSelector((state: any) => state);
-  const { user } = useSelector((state: any) => state.login);
+  const { timer } = useSelector((state: StoreState) => state);
+  const { user } = useSelector((state: StoreState) => state.login);
 
   const router = useRouter();
   

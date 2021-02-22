@@ -1,12 +1,13 @@
 import { useMemo } from 'react'
 import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { StoreType } from '../interfaces/store';
 import loginSaga from './login/saga';
 
 import reducers from './reducers'
 import timerSaga from './timer/saga'
 
-let store: any;
+let store: StoreType;
 
 const bindMiddleware = (middleware: any) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -34,7 +35,7 @@ export const initializeStore = (preloadedState: any) => {
       ...preloadedState,
     }, sagaMiddleware);
 
-    store = undefined;
+    store = undefined as unknown as StoreType;
   }
 
   if (typeof window === 'undefined') return _store;
@@ -43,7 +44,7 @@ export const initializeStore = (preloadedState: any) => {
 
   store.sagaTask = sagaMiddleware.run(timerSaga);
   store.sagaTask = sagaMiddleware.run(loginSaga);
-  
+
   return _store;
 }
 

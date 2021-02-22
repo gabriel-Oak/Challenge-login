@@ -2,6 +2,7 @@ import Router from 'next/router';
 import { SyntheticEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginFieldEvent, LoginFormData } from '../../../interfaces/login';
+import { StoreState } from '../../../interfaces/store';
 import { logIn } from '../../../store/login/actions';
 import isEmail from '../../../utils/isEmail';
 import TextField from '../TextField';
@@ -10,7 +11,7 @@ import {
 } from './styles';
 
 const LoginForm: React.FC = () => {
-  const { user, loading } = useSelector((store: any) => store.login);
+  const { user, loading } = useSelector((store: StoreState) => store.login);
   const dispatch = useDispatch();
 
   // Using local state just to demonstrate useState hook
