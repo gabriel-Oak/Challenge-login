@@ -25,6 +25,10 @@ export const FormContainer = styled.section`
   min-width: 400px;
   position: relative;
   overflow: auto;
+
+  @media (max-width: 400px) {
+    min-width: 100%;
+  }
 `;
 
 export const Form = styled.form`
@@ -33,6 +37,12 @@ export const Form = styled.form`
   left: 96px;
   width: 100%;
   max-width: 256px;
+  
+  @media (max-width: 400px) {
+    left: 50%;
+    transform: translate(-50%);
+    top: 48px;
+  }
 `;
 
 export const Input = styled.input`
@@ -42,7 +52,6 @@ export const Input = styled.input`
   border-radius: 8px;
   height: 48px;
   width: 100%;
-  margin: 8px 0 18px 0;
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.secondary};
@@ -86,4 +95,30 @@ export const BottomCaption = styled.div`
   text-align: center;
   color: #989FDB;
   padding: 0 24px;
+`;
+
+export const ErrorLabel = styled.div`
+  color: ${({theme}) => theme.colors.secondary};
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 28px;
+  padding-left: 18px;
+`;
+
+export const InputContainer = styled.div`
+  margin: 8px 0 18px 0;
+  width: 100%;
+  position: relative;
+`;
+
+export const CloseButton = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  position: absolute;
+  right: 16px;
+  top: 32px;
+  cursor: pointer;
 `;
