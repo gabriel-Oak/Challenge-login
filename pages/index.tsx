@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { UserData } from '../src/interfaces/user';
-import { clearUser, getUser } from '../src/services/authService';
+import { getUser } from '../src/services/authService';
 import { useRouter } from 'next/router'
 import theme from '../src/utils/theme';
 import GlobalStyles from '../src/utils/globalStyles';
+import { startClock } from '../src/store/timer/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut, setUser } from '../src/store/login/actions';
 
 const Button = styled.button`
   height: 48px;
@@ -28,37 +30,36 @@ const Button = styled.button`
 `;
 
 const IndexPage: React.FC = () => {
-  const router = useRouter();
-  const [user, setUser] = useState(undefined as unknown as UserData);
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    setUser(getUser());
-  }, []);
+    dispatch(startClock());
+    dispatch(setUser(getUser()));
+  }, [dispatch]);
 
+  const { timer } = useSelector((state: any) => state);
+  const { user } = useSelector((state: any) => state.login);
+
+  const router = useRouter();
+  
   if (!user && typeof window !== 'undefined' && typeof user !== 'undefined') {
     router.replace('/login');
   }
 
-  const handleQuit = () => {
-    clearUser();
-    setUser(null as unknown as UserData);
-  }
+  const handleQuit = () => dispatch(logOut());
 
   return (
     <ThemeProvider theme={theme} >
       <GlobalStyles />
-
       <div>
         <h1>Bem vindo(a) {user && user.name}</h1>
 
         <Button onClick={handleQuit}>SAIR</Button>
+
+        <h1>Exemplo de clock com redux</h1>
+        {JSON.stringify(timer)}
       </div>
     </ThemeProvider>
   );
 }
-
-export const getStaticProps = async () => ({
-  props: {},
-});
 
 export default IndexPage
