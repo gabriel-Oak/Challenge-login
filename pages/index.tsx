@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { UserData } from '../interfaces/user';
-import { clearUser, getUser } from '../services/authService';
+import { UserData } from '../src/interfaces/user';
+import { clearUser, getUser } from '../src/services/authService';
 import { useRouter } from 'next/router'
-import theme from '../utils/theme';
-import GlobalStyles from '../utils/globalStyles';
+import theme from '../src/utils/theme';
+import GlobalStyles from '../src/utils/globalStyles';
 
 const Button = styled.button`
   height: 48px;
