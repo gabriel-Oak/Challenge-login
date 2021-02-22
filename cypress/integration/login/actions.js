@@ -43,6 +43,9 @@ context('Actions', () => {
   });
 
   it('Should log in succesfuly', () => {
+    cy.intercept('POST', 'https://6032abeaa223790017acf5a8.mockapi.io/login')
+      .as('login');
+
     cy.get('[name=email]')
       .type('flavio.algusto@wiser.com', { delay: 100 });
 
@@ -50,6 +53,7 @@ context('Actions', () => {
       .type('senhaforte123', { delay: 100 });
 
     cy.get('[type=submit]').click();
+    cy.wait('@login');
     cy.location('pathname').should('eq', '/');
   });
 });
