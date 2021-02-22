@@ -1,20 +1,19 @@
 import Router from 'next/router';
-import { SyntheticEvent, useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
+import { SyntheticEvent, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginFieldEvent, LoginFormData } from '../../../interfaces/login';
-import { UserData } from '../../../interfaces/user';
-import apiService from '../../../services/apiService';
-import { getUser, storeUser } from '../../../services/authService';
+import { logIn } from '../../../store/login/actions';
 import isEmail from '../../../utils/isEmail';
-import validateLoginForm from '../../../utils/validateLoginForm';
 import TextField from '../TextField';
 import {
   BottomCaption, Form, FormContainer, Header, PasswordLink, Subheader, SubmitButton,
 } from './styles';
 
 const LoginForm: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(null as unknown as UserData);
+  const { user, loading } = useSelector((store: any) => store.login);
+  const dispatch = useDispatch();
+
+  // Using local state just to demonstrate useState hook
   const [form, setForm] = useState({
     email: {
       value: '',
@@ -25,10 +24,6 @@ const LoginForm: React.FC = () => {
       touched: false,
     },
   });
-
-  useEffect(() => {
-    setUser(getUser());
-  }, []);
 
   const handleClearEmail = () => setForm({
     ...form,
@@ -73,26 +68,7 @@ const LoginForm: React.FC = () => {
       email: form.email.value,
       password: form.password.value,
     }
-
-    if (!validateLoginForm(formData)) return;
-
-    setLoading(true);
-
-    try {
-      const { data: user } = await apiService.post<UserData>('/login', formData);
-
-      setUser(user);
-      storeUser(user);
-    } catch (error) {
-      console.error(error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: error,
-      })
-    }
-
-    setLoading(false);
+    dispatch(logIn(formData));
   }
 
   if (!!user) Router.replace('/');

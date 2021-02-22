@@ -5,8 +5,18 @@ import {
 } from '../src/components/login/styles';
 import GlobalStyles from '../src/utils/globalStyles';
 import LoginForm from '../src/components/login/LoginForm';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../src/store/login/actions';
+import { getUser } from '../src/services/authService';
+import { useEffect } from 'react';
 
-const LoginPage: React.FC = () => (
+const LoginPage: React.FC = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setUser(getUser()));
+  }, [dispatch]);
+  
+  return (
   <ThemeProvider theme={theme} >
     <GlobalStyles />
 
@@ -18,7 +28,7 @@ const LoginPage: React.FC = () => (
       <LoginForm />
     </Main>
   </ThemeProvider>
-);
+);}
 
 export const getStaticProps = async () => ({
   props: {},
