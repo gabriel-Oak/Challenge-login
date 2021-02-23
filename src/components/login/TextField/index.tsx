@@ -4,7 +4,7 @@ import {
 } from './styles';
 
 interface Props {
-  disabled: boolean;
+  disabled?: boolean;
   value: string;
   error?: string;
   label: string;
@@ -12,8 +12,8 @@ interface Props {
   onClear?: (() => void);
   id: string;
   name: string;
-  placeholder: string;
-  type: string;
+  placeholder?: string;
+  type?: string;
 }
 
 const TextField: React.FC<Props> = ({

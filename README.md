@@ -13,3 +13,4 @@ para experimentar, basta executar:
 
 ## Tests
  - npm run test:e2e - End to End tests | Testes de Ponta a Ponta
+ - npm test - unity tests | Testes de unidade
