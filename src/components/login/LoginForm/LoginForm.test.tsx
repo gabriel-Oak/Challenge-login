@@ -4,13 +4,24 @@ import LoginForm from '.';
 import { ThemeProvider } from 'styled-components';
 import theme from '../../../utils/theme';
 import createMockStore from '../../../utils/createMockStore';
+import { UserData } from '../../../interfaces/user';
 
 describe('LoginForm Tests', () => {
-  
+
 
   it('Should render correctly', () => {
-    const store = createMockStore();
-    
+    const mockStore = createMockStore();
+    const store = mockStore({
+      login: {
+        loading: false,
+        user: undefined as unknown as UserData,
+      },
+      timer: {
+        lastUpdate: '123545654',
+        light: false,
+      },
+    });
+
     const component = mount(
       <Provider store={store}>
         <ThemeProvider theme={theme}>

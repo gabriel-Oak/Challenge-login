@@ -7,7 +7,7 @@
     "start": "next start",
     "type-check": "tsc",
     "test:e2e": "cypress open",
-    "test": "jest"
+    "test": "jest --watchAll=false --coverage"
   },
   "dependencies": {
     "axios": "^0.21.1",
