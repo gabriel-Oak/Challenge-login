@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-const PasswordRecvery: React.FC = () => (
+const PasswordRecovery: React.FC = () => (
   <main>
     <p>
       PAGINA DE RECUPERAÇÂO DE SENHA...
@@ -11,4 +11,4 @@ const PasswordRecvery: React.FC = () => (
   </main>
 );
 
-export default PasswordRecvery;
+export default PasswordRecovery;

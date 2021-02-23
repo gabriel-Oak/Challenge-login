@@ -6,7 +6,7 @@ describe('TextField Tests', () => {
 
   it('Should render correctly', () => {
     const component = shallow(
-      <TextField 
+      <TextField
         label="Half Name"
         id="half-name"
         name="name"
@@ -23,7 +23,7 @@ describe('TextField Tests', () => {
     const handleChange = jest.fn();
 
     const component = shallow(
-      <TextField 
+      <TextField
         label="Half Name"
         id="half-name"
         name="name"
@@ -32,10 +32,8 @@ describe('TextField Tests', () => {
       />
     );
 
-    component.find('#half-name').simulate('change', { target: { value: 'abcdefg'} });
+    component.find('#half-name').simulate('change', { target: { value: 'abcdefg' } });
     expect(handleChange).toHaveBeenCalled();
   });
 
 });
-
-export {};

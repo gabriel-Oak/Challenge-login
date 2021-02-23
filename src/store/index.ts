@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { StoreType } from '../interfaces/store';
+import { StoreState, StoreType } from '../interfaces/store';
 import loginSaga from './login/saga';
 
 import reducers from './reducers'
@@ -17,7 +17,7 @@ const bindMiddleware = (middleware: any) => {
   return applyMiddleware(...middleware)
 }
 
-function initStore(initialState: any, middleware: any) {
+function initStore(initialState: StoreState, middleware: any) {
   return createStore(
     reducers,
     initialState,
@@ -25,7 +25,7 @@ function initStore(initialState: any, middleware: any) {
   )
 }
 
-export const initializeStore = (preloadedState: any) => {
+export const initializeStore = (preloadedState: StoreState) => {
   const sagaMiddleware = createSagaMiddleware();
   let _store = store ?? initStore(preloadedState, bindMiddleware([sagaMiddleware]));
 
@@ -48,7 +48,7 @@ export const initializeStore = (preloadedState: any) => {
   return _store;
 }
 
-export function useStore(initialState: any) {
+export function useStore(initialState: StoreState) {
   const store = useMemo(() => initializeStore(initialState), [initialState]);
   return store;
 }

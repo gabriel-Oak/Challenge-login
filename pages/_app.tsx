@@ -8,7 +8,7 @@ interface Props {
 }
 
 const App: FC<Props> = ({ Component, pageProps }) => {
-  const store = useStore(pageProps.initialReduxState)
+  const store = useStore(pageProps.initialReduxState);
 
   return (
     <Provider store={store}>
