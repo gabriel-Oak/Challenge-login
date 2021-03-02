@@ -14,3 +14,7 @@ para experimentar, basta executar:
 ## Tests
  - npm run test:e2e - End to End tests | Testes de Ponta a Ponta
  - npm test - unity tests | Testes de unidade
+
+![](https://github.com/gabriel-Oak/Challenge-login/blob/main/demo/screenshot.png?raw=true)
+![](https://github.com/gabriel-Oak/Challenge-login/blob/main/demo/login.gif?raw=true)
+![](https://github.com/gabriel-Oak/Challenge-login/blob/main/demo/home.gif?raw=true)
