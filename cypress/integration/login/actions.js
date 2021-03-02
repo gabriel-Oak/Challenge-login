@@ -12,7 +12,7 @@ context('Actions', () => {
 
   it('Should interact with email field', () => {
     cy.get('[name=email]')
-      .type('hello-flavio', { delay: 100 });
+      .type('hello-mockito', { delay: 100 });
 
     cy.get('div')
       .contains('Digite um e-mail válido;')
@@ -23,12 +23,12 @@ context('Actions', () => {
       .click();
 
     cy.get('[name=email]')
-      .type('flavio.algusto@wiser.com', { delay: 100 });
+      .type('mockito.algusto@oak.com', { delay: 100 });
   });
 
   it('Should interact with password field', () => {
     cy.get('[name=password]')
-      .type('hello-flavio', { delay: 100 });
+      .type('hello-mockito', { delay: 100 });
 
     cy.get('[name=password]')
       .last()
@@ -47,7 +47,7 @@ context('Actions', () => {
       .as('login');
 
     cy.get('[name=email]')
-      .type('flavio.algusto@wiser.com', { delay: 100 });
+      .type('mockito.algusto@oak.com', { delay: 100 });
 
     cy.get('[name=password]')
       .type('senhaforte123', { delay: 100 });
